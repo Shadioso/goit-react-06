@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { Form } from './Form/Form';
 import { Wrapper, Title } from './App.styled';
 import { Filter } from './Filter/Filter';
@@ -14,24 +13,8 @@ const { handleChangeFilter } = filterReducer.actions;
 //
 export const App = () => {
   const dispatch = useDispatch();
-  const contactList = useSelector(contactListSelector);
+  const contactList = useSelector(contactListSelector).contacts;
   const filterList = useSelector(filterSelector);
-  // const [contacts, setContacts] = useState(
-  //   JSON.parse(window.localStorage.getItem(`contacts`)) ?? []
-  // );
-
-  // useEffect(() => {
-  //   localStorage.setItem(`contacts`, JSON.stringify(contacts));
-  // }, [contacts]);
-
-  // useEffect(() => {
-  //   const contactList = localStorage.getItem(`contacts`);
-  //   const parsedList = JSON.parse(contactList);
-  //   if (parsedList) {
-  //     setContacts(parsedList);
-  //   }
-  // }, []);
-  //
   const ChangeFilter = e => {
     dispatch(handleChangeFilter(e.target.value));
   };
