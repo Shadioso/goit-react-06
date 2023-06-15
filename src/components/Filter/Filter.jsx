@@ -1,10 +1,19 @@
-import PropTypes from 'prop-types';
 import { Label, Input } from 'components/PhoneBook/PhoneBook.styled';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { filterSelector } from 'redux/selectors';
+import { filterReducer } from 'redux/filterReducer';
 
-const Filter = ({ onChange }) => {
+//
+const { handleChangeFilter } = filterReducer.actions;
+//
+const Filter = () => {
+  const dispatch = useDispatch();
+
   const filter = useSelector(filterSelector);
+
+  const changeFilter = e => {
+    dispatch(handleChangeFilter(e.target.value));
+  };
   return (
     <>
       <Label htmlFor="1">Find contacts by name</Label>
@@ -14,14 +23,10 @@ const Filter = ({ onChange }) => {
         name="filter"
         title="Use this field to filter contacts by contact's name"
         value={filter}
-        onChange={onChange}
+        onChange={changeFilter}
       />
     </>
   );
-};
-
-Filter.propTypes = {
-  onChange: PropTypes.func.isRequired,
 };
 
 export { Filter };
